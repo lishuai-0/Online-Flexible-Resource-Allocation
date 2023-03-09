@@ -1,0 +1,128 @@
+%% ----------------------------------------------------------------
+%% Project.tex
+%% ----------------------------------------------------------------
+\documentclass[sotoncolour]{extra/uos_project}     % Use the Project Style with custom link colour
+\usepackage[round]{natbib}           % Use Natbib style for the refs.
+\usepackage{bibentry}                % Use bibentry for prepublished works
+\usepackage{pdfpages}                % Use pdfpages to enables pdf's to be inserted into the project
+\usepackage{wrapfig}                 % Use wrapfig for wrapped figures
+\usepackage{float}                   % Use for locating figure and table locations
+\usepackage{verbatim}                % use for word count
+\usepackage{attrib}                  % Use the attrib package for quotations
+
+\nobibliography*                     % Use bibentry for prepublished works
+\hypersetup{colorlinks=true}         % Set to false for black/white printing
+\input{extra/definitions}            % Include your abbreviations
+\pdfminorversion=7                   % Fixes warnings for importing pdf documents
+\newcommand\wordcount{\verbatiminput{extra/wordcount.sum}}  % For word count command in appendix
+
+\hyphenpenalty=10000
+\tolerance=5000
+\emergencystretch=2.5em
+
+\lstloadlanguages{Python}  % Used for lstlisting
+\lstset{
+  language=Python,
+  basicstyle=\scriptsize\sffamily,
+  numberstyle=\color{gray},
+  stringstyle=\color[HTML]{933797},
+  commentstyle=\color[HTML]{228B22}\sffamily,
+  emph={[2]from,import,pass,return}, emphstyle={[2]\color[HTML]{DD52F0}},
+  emph={[3]range}, emphstyle={[3]\color[HTML]{D17032}},
+  emph={[4]for,in,def}, emphstyle={[4]\color{blue}},
+  showstringspaces=false,
+  breaklines=true,
+  prebreak=\mbox{{\color{gray}\tiny$\searrow$}},
+  numbers=left,
+  xleftmargin=15pt,
+  aboveskip=10pt
+}
+
+%% ----------------------------------------------------------------
+%% --------------------THESIS/DOC INFORMATION ---------------------
+\department  {School of Electronics and Computer Science}
+\DEPARTMENT  {\MakeUppercase{\deptname}}
+\group       {}
+\GROUP       {\MakeUppercase{\groupname}}
+\faculty     {Faculty of Physical Engineering and Science}
+\FACULTY     {\MakeUppercase{\facname}}
+\title       {Reinforcement Learning agents for Online Flexible Resource allocation in Mobile Edge Computing}
+\authors     {\texorpdfstring
+             {\href{mailto:mt5g17@soton.ac.uk}{Mark Towers}}
+             {Mark Towers}}
+\addresses  {\groupname\\\deptname\\\univname}
+\date       {\today}
+\supervisor {Dr Timothy Norman}
+\examiner   {Dr Nicholas Harris}
+\degree     {MEng Computer Science}
+%% \qualifications{}
+\subject    {}
+\keywords   {Mobile Edge Computing, Auctions, Resource Allocation, Reinforcement Learning}
+
+\begin{document}
+%% ------------------ FRONT MATTER ORGANISATION -------------------
+\frontmatter
+\maketitle
+\begin{abstract}
+  Mobile Edge Computing enables computational tasks to be completed at the edge of the network reducing
+  network congestion and latency compared to traditional Cloud Computing. A key challenge of these settings is that
+  servers have limited computational resources that need to be allocated to many self-interested users. Existing
+  resource allocation approaches assume that tasks have fixed resource requirements (i.e. a fixed amount of
+  computation, bandwidth and storage) that results in inefficient resource usage and even bottlenecks.
+  This project expands on Flexible resource allocation to Online settings such that tasks arrive overtime where auction
+  bids and resource allocation are determined by agents trained using Reinforcement Learning.
+  Using Flexible resource allocation, significantly more tasks are completed than Fixed resource allocation solutions
+  however Flexible resource allocations cause $\sim$5\% of tasks to be not completed within their deadline.
+  Along with this a range of training hyperparameters, Reinforcement Learning algorithms and Network Architectures were
+  explored and compared.
+\end{abstract}
+
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents
+\listoffigures
+\listoftables
+%% The List of listings does not, by default, appear in the ToC, so....
+\addtotoc{Listings}
+% \lstlistoflistings
+% \listofaddmaterial
+% \addtolom{Material Name e.g Map}
+% \addtolom{Material Name e.g CD}
+% \addtolom{Test Material}
+
+%% ---------- AUTHORSHIP DECLARATION/ ACKNOW. / DEDICATORY ----------
+%% Either include citations like below (as many as required spaced with commas or 'and').
+%% \bibentry command must be used here with prepublished papers
+\authorshipdeclaration{\bibentry{Gunn:2001:pdflatex}\newline\bibentry{Lovell:2011:updated}\newline\bibentry{Gunn:2011:updated2}}
+%% Or state no citations like below
+%% \authorshipdeclaration{}
+%% -----------------------
+\acknowledgements{
+  Thank you to my family (especially Maggie, the cat) for all their support over the years as I would not be where I
+  am now without them. \\
+  To my housemates for surviving with me pestering them about proof reading badly written papers and dealing with me
+  stressing about this project.
+
+  This project wouldn't have started without Dr Sebastian Stein, Professor Tim Norman and a team of Pennsylvania State
+  University that have helped produced a paper investigating the static case of this problem. Thank to all of them for
+  sharing ideas and support for that paper and this project. \\
+  To Professor Timothy Norman for his constant guidance over the project and for surviving my bad spelling and grammar.
+}
+
+\mainmatter
+%% ------------------ MAIN MATTER (CONTENT) --------------------
+\include{chapters/1_introduction}
+\include{chapters/2_background_lit}
+\include{chapters/3_solution}
+\include{chapters/4_implementation}
+\include{chapters/5_evaluation}
+\include{chapters/6_conclusion}
+
+\bibliographystyle{plainnat}
+\bibliography{extra/references}
+
+\backmatter
+\appendix
+\include{chapters/7_appendix}
+
+\end{document}
+%% ----------------------------------------------------------------
